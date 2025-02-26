@@ -1,0 +1,65 @@
+$backgroundItem: #f5f5f5;
+$backgroundItemHover: #e6e6e6;
+
+div {
+  .todo-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    min-width: 360px;
+    padding: 0px 50px;
+    // background-color: #F8F8F8;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #F8F8F8;
+    }
+
+    .todo-action {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      padding: 10px;
+    }
+
+    .todo-item {
+      width: 80%;
+      display: flex;
+      
+      .todo-item-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .todo-item-action {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+      }
+    }
+  }
+
+    // Form
+    button {
+      padding: 10px;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      background-color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: #e6e6e6fa;
+      }
+    }
+
+    textarea {
+      border: 1px solid #e6e6e6;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+      resize: none;
+    }
+}
