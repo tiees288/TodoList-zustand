@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { Provider, useAtom, useAtomValue, useSetAtom } from "jotai";
 import TodoBody from "@/components/TodoBody";
-import { todoStore1, todoStore2 } from "../../atoms/atom";
+import { TodoProvider } from "@/context/TodoContext";
 
 export default function Home() {
   return (
@@ -9,9 +8,9 @@ export default function Home() {
       <Head>
         <title>Home</title>
       </Head>
-      <Provider store={todoStore1}>
+      <TodoProvider>
         <TodoBody />
-      </Provider>
+      </TodoProvider>
     </>
   );
 }

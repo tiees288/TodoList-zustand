@@ -1,7 +1,6 @@
+import { TodoContext } from "@/context/TodoContext";
 import { Todo } from "@/interfaces/Todo.interface";
-import { useAtom } from "jotai";
-import { todoAtom } from "../../atoms/atom";
-
+import { useContext } from "react";
 interface Props {
      idx: number;
      todo: Todo;
@@ -9,29 +8,26 @@ interface Props {
 
 export default function TdodoItem(props: Props) {
      const { idx, todo } = props;
-     const [todoList, setTodoList] = useAtom(todoAtom);
+     const { todos: todoList, toggleTodo: toggleTodoCtx, removeTodo, updateTodo } = useContext(TodoContext);
 
      const openEditTodoDialog = (idx: number) => {
           const prevTodo = todoList[idx];
           const result = prompt("Edit Todo", prevTodo.description);
           if (!result) return;
-          setTodoList((prev) => {
-            prev[idx].description = result;
+          updateTodo(idx, {
+               ...prevTodo,
+               description: result
           });
      }
 
      const toggleTodo = (idx: number) => {
-          setTodoList((prev) => {
-               prev[idx].completed = !prev[idx].completed;  
-          });
+          toggleTodoCtx(idx);
      }
 
      const openConfirmDeleteDialog = (idx: number) => {
           const result = window.confirm("Are you sure you want to delete this todo?");
           if (!result) return;
-          setTodoList((prev) => {
-               return prev.filter((_, index) => index !== idx);
-          });
+         removeTodo(idx);
      }
 
      return (
