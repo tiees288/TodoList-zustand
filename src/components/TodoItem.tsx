@@ -1,4 +1,6 @@
-import { Todo, useTodoStore } from "../../stores/todoStore";
+import { Todo } from "@/interfaces/Todo.interface";
+import { useAtom } from "jotai";
+import { todoAtom } from "../../atoms/atom";
 
 interface Props {
      idx: number;
@@ -7,20 +9,26 @@ interface Props {
 
 export default function TdodoItem(props: Props) {
      const { idx, todo } = props;
-     const toogleTodoFromStore = useTodoStore((state) => state.toggleTodo);
-     const editTodoFromStore = useTodoStore((state) => state.editTodo);
-     const deleteTodoFromStore = useTodoStore((state) => state.removeTodo);
+     const [todoList, setTodoList] = useAtom(todoAtom);
 
      const openEditTodoDialog = (idx: number) => {
-          const prevTodo = useTodoStore.getState().todos[idx];
+          const prevTodo = todoList[idx];
           const result = prompt("Edit Todo", prevTodo.description);
           if (!result) return;
-          editTodoFromStore(idx, result);
+          setTodoList((prev) => {
+            prev[idx].description = result;
+            return [...prev];
+          });
+     }
+
+     const toggleTodo = (idx: number) => {
+          setTodoList((prev) => {
+               prev[idx].completed = !prev[idx].completed;  
+          });
      }
 
      const openConfirmDeleteDialog = (idx: number) => {
           const result = window.confirm("Are you sure you want to delete this todo?");
-          if (result) deleteTodoFromStore(idx);
      }
 
      return (
@@ -39,7 +47,7 @@ export default function TdodoItem(props: Props) {
                </div>
                <div className="todo-item-action">
                     <button
-                         onClick={() => toogleTodoFromStore(idx)}
+                         onClick={() => toggleTodo(idx)}
                     >Toggle</button>
                     <button
                          onClick={() => openEditTodoDialog(idx)}

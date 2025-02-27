@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "immer": "^10.1.1",
+    "jotai": "^2.12.1",
+    "jotai-immer": "^0.4.1",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "zustand": "^5.0.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
