@@ -17,7 +17,6 @@ export default function TdodoItem(props: Props) {
           if (!result) return;
           setTodoList((prev) => {
             prev[idx].description = result;
-            return [...prev];
           });
      }
 
@@ -29,6 +28,10 @@ export default function TdodoItem(props: Props) {
 
      const openConfirmDeleteDialog = (idx: number) => {
           const result = window.confirm("Are you sure you want to delete this todo?");
+          if (!result) return;
+          setTodoList((prev) => {
+               return prev.filter((_, index) => index !== idx);
+          });
      }
 
      return (
