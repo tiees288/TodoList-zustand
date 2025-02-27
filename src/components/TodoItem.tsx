@@ -1,4 +1,4 @@
-import { Todo, useTodoStore } from "../../stores/todoStore";
+import { Todo, useTodoStore } from "../stores/todoStore";
 
 interface Props {
      idx: number;

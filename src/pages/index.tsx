@@ -1,7 +1,7 @@
 'use client';
 
 import Head from "next/head";
-import { Todo, useTodoStore } from "../../stores/todoStore";
+import { Todo, useTodoStore } from "../stores/todoStore";
 import React from "react";
 import TdodoItem from "@/components/TodoItem";
 
