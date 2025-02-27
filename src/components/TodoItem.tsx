@@ -2,11 +2,11 @@ import { Todo, useTodoStore } from "../stores/todoStore";
 
 interface Props {
      idx: number;
-     todo: Todo;
 }
 
 export default function TdodoItem(props: Props) {
-     const { idx, todo } = props;
+     const { idx } = props;
+     const todo = useTodoStore((state) => state.todos[idx]);
      const toogleTodoFromStore = useTodoStore((state) => state.toggleTodo);
      const editTodoFromStore = useTodoStore((state) => state.editTodo);
      const deleteTodoFromStore = useTodoStore((state) => state.removeTodo);
