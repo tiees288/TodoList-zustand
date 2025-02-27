@@ -1,15 +1,18 @@
-import { TodoContext } from "@/context/TodoContext";
 import { Todo } from "@/interfaces/Todo.interface";
 import { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import { TodoStoreContext } from "@/stores/todoStore";
 interface Props {
      idx: number;
-     todo: Todo;
 }
 
-export default function TdodoItem(props: Props) {
-     const { idx, todo } = props;
-     const { todos: todoList, toggleTodo: toggleTodoCtx, removeTodo, updateTodo } = useContext(TodoContext);
+const TdodoItem = observer((props: Props) => {
+     const { idx } = props;
+     const store = useContext(TodoStoreContext);
+     const { todoList, updateTodo, removeTodo, toggleTodo: toggleTodoStore } = store;
 
+
+     const todo = todoList[idx];
      const openEditTodoDialog = (idx: number) => {
           const prevTodo = todoList[idx];
           const result = prompt("Edit Todo", prevTodo.description);
@@ -21,13 +24,13 @@ export default function TdodoItem(props: Props) {
      }
 
      const toggleTodo = (idx: number) => {
-          toggleTodoCtx(idx);
+          toggleTodoStore(idx);
      }
 
      const openConfirmDeleteDialog = (idx: number) => {
           const result = window.confirm("Are you sure you want to delete this todo?");
           if (!result) return;
-         removeTodo(idx);
+          removeTodo(idx);
      }
 
      return (
@@ -57,4 +60,6 @@ export default function TdodoItem(props: Props) {
                </div>
           </div>
      );
-}
+});
+
+export default TdodoItem;
